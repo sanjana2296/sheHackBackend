@@ -3,19 +3,17 @@ import axios from 'axios';
 import cors from 'cors';
 
 const app = express();
-const port = 4000;  
-
+const port = 5000;  
 app.use(cors({
   credentials: true,
-  origin: process.env.NETLIFY_URL || "http://localhost:5000",
+  origin: process.env.NETLIFY_URL || "http://localhost:3000",
 }
 ));
 
 // Slack API route
 app.get('/slack/messages', async (req, res) => {
   const channelId = 'C08JXG5U4SW';  // Slack channel ID
-  const slackToken = process.env.REACT_APP_SLACK_OAUTH_TOKEN;  // Slack OAuth token
-
+  const slackToken = process.env.REACT_APP_SLACK_OAUTH_TOKEN ;  // Slack OAuth token
 
   try {
     const response = await axios.get(`https://slack.com/api/conversations.history?channel=${channelId}`, {
@@ -23,7 +21,7 @@ app.get('/slack/messages', async (req, res) => {
         Authorization: `Bearer ${slackToken}`,
       },
     });
-    
+
     if (response.data.ok) {
       console.log(response.data.messages);
       res.json(response.data.messages);  
