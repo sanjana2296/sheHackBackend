@@ -7,7 +7,7 @@ const port = 4000;
 
 app.use(cors({
   credentials: true,
-  origin: process.env.NETLIFY_URL || "http://localhost:3000",
+  origin: process.env.NETLIFY_URL || "http://localhost:5000",
 }
 ));
 
@@ -23,7 +23,7 @@ app.get('/slack/messages', async (req, res) => {
         Authorization: `Bearer ${slackToken}`,
       },
     });
-
+    
     if (response.data.ok) {
       console.log(response.data.messages);
       res.json(response.data.messages);  
