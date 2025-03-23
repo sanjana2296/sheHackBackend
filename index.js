@@ -3,12 +3,12 @@ import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-dotenv.config(); // Load environment variables from .env
+dotenv.config(); 
 
 const app = express();
 const port = 5001;
 
-// Middleware
+
 app.use(cors({
   credentials: true,
   origin: process.env.NETLIFY_URL || "http://localhost:3000",
@@ -17,9 +17,8 @@ app.use(express.json());
 
 const slackToken = process.env.REACT_APP_SLACK_OAUTH_TOKEN;
 const huggingFaceToken = process.env.HUGGING_FACE_TOKEN;
-const apyToken = process.env.APYHUB_TOKEN || 'your_apyhub_token_here'; // replace or load from .env
+const apyToken = process.env.APYHUB_TOKEN; 
 
-// ===================== SLACK: Fetch Channels =====================
 app.get('/api/channels', async (req, res) => {
     try {
       const response = await axios.get('https://slack.com/api/conversations.list', {
@@ -37,7 +36,6 @@ app.get('/api/channels', async (req, res) => {
     }
   });
 
-// ===================== SLACK: Fetch + Summarize Messages =====================
 app.get('/api/messages', async (req, res) => {
   const channelId = req.query.channelId;
 
@@ -90,7 +88,6 @@ app.get('/slack/messages', async (req, res) => {
   }
 });
 
-// ===================== APYHUB: Summarize a Web URL =====================
 app.post('/summarize', async (req, res) => {
   console.log('📥 Received request body:', req.body);
   try {
@@ -121,7 +118,6 @@ app.post('/summarize', async (req, res) => {
   }
 });
 
-// ===================== START SERVER =====================
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
