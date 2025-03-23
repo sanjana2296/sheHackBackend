@@ -1,4 +1,4 @@
-# SheBalance
+# SheBalanceBackend
 
 SheBalance is an AI-driven platform designed to help working mothers smoothly transition back to work after maternity leave by keeping them informed, skilled, and supported.
 
@@ -20,7 +20,7 @@ To get started with the project, follow these steps:
 
 2. Navigate to the project directory:
     ```bash
-    cd sheHack
+    cd sheHackBackend
     ```
 
 3. Install dependencies:
